@@ -1,4 +1,7 @@
 export class Satellite {
+  isSpaceDebris(): any {
+    throw new Error('Method not implemented.');
+  }
 
 	name: string;
 	type: string;
