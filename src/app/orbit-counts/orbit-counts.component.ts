@@ -7,25 +7,29 @@ import { Satellite } from '../satellite';
   styleUrls: ['./orbit-counts.component.css']
 })
 export class OrbitCountsComponent implements OnInit {
-
 	@Input() satellites: Satellite[];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  countByType(type: string): number {
-	let count = 0;
-	if (this.satellites) {
-	  for (let i = 0; i < this.satellites.length; i++) {
-		 if (this.satellites[i].type === type) {
-			count++;
-		 }
-	  }
+  
+	countTypes: string[] = [
+	  'Total',
+	  'Space Debris',
+	  'Communication',
+	  'Probe',
+	  'Positioning',
+	  'Space Station',
+	  'Telescope'
+	]
+  
+	constructor() { }
+  
+	ngOnInit(): void {
 	}
-	return count;
- }
-
-
-}
+	
+	countBy(countType: string) {
+	  let satelliteCount = this.satellites.filter(satellite => satellite.type === countType).length;
+	  if (countType === 'Total') {
+		satelliteCount = this.satellites.length;
+	  }
+	  return satelliteCount;
+	}  
+  }
+  
